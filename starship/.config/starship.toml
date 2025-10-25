@@ -88,4 +88,4 @@ error_symbol = "[✘](bold fg:red)"
 symbol = " "      # 或者你喜欢的符号
 style = "fg:mauve"
 format = "[$symbol$environment]($style)"
-ignore_base = false   # 是否忽略 base 环境，false 表示显示    
+ignore_base = false   # 是否忽略 base 环境，false 表示显示
