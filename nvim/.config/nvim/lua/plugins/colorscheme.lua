@@ -1,12 +1,12 @@
 return {
   -- add gruvbox
-  { "neanias/everforest-nvim" },
+  { "catppuccin/nvim" },
 
   -- Configure LazyVim to load gruvbox
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "everforest",
+      colorscheme = "catppuccin-frappe",
     },
   },
 }
