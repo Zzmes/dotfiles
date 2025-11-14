@@ -7,7 +7,6 @@
 -- Or remove existing autocmds by their group name (which is prefixed with `lazyvim_` for the defaults)
 -- e.g. vim.api.nvim_del_augroup_by_name("lazyvim_wrap_spell")
 
--- 改行号颜色
 vim.cmd([[
   highlight CursorLineNr guifg=#a6e3a1  " 当前行号（绿色）
 ]])
