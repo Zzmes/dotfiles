@@ -3,23 +3,45 @@ return {
     "neovim/nvim-lspconfig",
     opts = {
       servers = {
-        -- Ruff handles linting and formatting. Pyright focuses on useful type
-        -- errors, completion, navigation, and hover information.
         pyright = {
+          -- Pyright's pull-diagnostic path still emits unused-code hints in
+          -- this version. Push diagnostics honor disableTaggedHints.
+          capabilities = {
+            textDocument = {
+              diagnostic = { dynamicRegistration = false },
+            },
+          },
           settings = {
+            pyright = {
+              -- Let Ruff provide the organize-imports action.
+              disableOrganizeImports = true,
+              -- Avoid gray unused-code hints duplicating Ruff diagnostics.
+              disableTaggedHints = true,
+            },
             python = {
               analysis = {
-                diagnosticMode = "openFilesOnly",
                 typeCheckingMode = "basic",
                 diagnosticSeverityOverrides = {
-                  -- Ruff already reports these; hiding the duplicates keeps
-                  -- the diagnostics list concise.
+                  -- Ruff owns unused-import/variable and duplicate-import lint.
                   reportDuplicateImport = "none",
                   reportUnusedImport = "none",
                   reportUnusedVariable = "none",
+                  -- Preserve the existing preference for these extra warnings.
                   reportUnusedFunction = "none",
                   reportUnusedClass = "none",
                 },
+              },
+            },
+          },
+        },
+        ruff = {
+          init_options = {
+            settings = {
+              -- Pyright owns syntax and name-resolution diagnostics, keeping
+              -- its control-flow analysis and type errors available.
+              showSyntaxErrors = false,
+              lint = {
+                ignore = { "F821", "F822", "F823" },
               },
             },
           },

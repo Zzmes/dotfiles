@@ -40,6 +40,14 @@ return {
           FloatTitle = { fg = colors.subtext0, bg = "none", bold = true },
           FloatFooter = { fg = colors.overlay1, bg = "none" },
           Pmenu = { fg = colors.overlay2, bg = "none" },
+          -- Cycle indent guides and the active scope through theme colors.
+          SnacksIndent1 = { fg = colors.red },
+          SnacksIndent2 = { fg = colors.peach },
+          SnacksIndent3 = { fg = colors.yellow },
+          SnacksIndent4 = { fg = colors.green },
+          SnacksIndent5 = { fg = colors.sapphire },
+          SnacksIndent6 = { fg = colors.mauve },
+
           SnacksNormal = { fg = colors.text, bg = "none" },
           SnacksNormalNC = { fg = colors.text, bg = "none" },
           SnacksPicker = { fg = colors.text, bg = "none" },
@@ -69,7 +77,7 @@ return {
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "catppuccin-macchiato",
+      colorscheme = "catppuccin-frappe",
     },
   },
 }

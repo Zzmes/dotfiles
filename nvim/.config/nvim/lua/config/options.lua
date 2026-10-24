@@ -4,5 +4,4 @@
 
 local opt = vim.opt
 
-opt.number = true -- 开启行号
 opt.relativenumber = false -- ❌ 关闭相对行号，显示真实行号
