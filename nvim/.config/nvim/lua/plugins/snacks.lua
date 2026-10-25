@@ -11,7 +11,7 @@ return {
   "folke/snacks.nvim",
   opts = {
     indent = {
-      indent = { enabled = false },
+      indent = { enabled = true, hl = "SnacksIndent" },
       scope = { enabled = true, only_current = true, hl = indent_colors },
       chunk = { enabled = false },
     },
