@@ -1,0 +1,12 @@
+{
+  // Personal defaults; project-local markdownlint configuration can override these.
+  "config": {
+    "MD013": false, // Allow long paragraphs, links and tables.
+    "MD024": false, // Repeated headings are useful in notes.
+    "MD025": false, // Allow multiple top-level headings.
+    "MD033": false, // Allow HTML, such as details/summary and image sizing.
+    "MD041": false  // Notes do not have to begin with a top-level heading.
+  },
+  "noBanner": true,
+  "noProgress": true
+}

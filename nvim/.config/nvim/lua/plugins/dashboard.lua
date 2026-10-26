@@ -190,7 +190,6 @@ local function blank(width)
   return { { (" "):rep(width) } }
 end
 
-local blink_used = false
 local function visible(self)
   return self.win and vim.api.nvim_win_is_valid(self.win)
     and vim.api.nvim_buf_is_valid(self.buf) and vim.api.nvim_win_get_buf(self.win) == self.buf
@@ -239,9 +238,10 @@ end
 
 local function attach_dashboard(self)
   if self._mikasa then return end
-  local state = { closed = false, timers = {}, stopped = false }
+  local state = { closed = false, timers = {}, stopped = true, generation = 0 }
   self._mikasa = state
   local function stop()
+    state.generation = state.generation + 1
     state.stopped = true
     state.closed = false
     for _, timer in ipairs(state.timers) do
@@ -249,26 +249,38 @@ local function attach_dashboard(self)
     end
     state.timers = {}
   end
-  vim.api.nvim_create_autocmd({ "BufLeave", "WinLeave", "BufWipeout", "BufDelete" }, {
-    group = self.augroup, buffer = self.buf, callback = stop,
-  })
-  vim.api.nvim_create_autocmd("BufEnter", {
-    group = self.augroup, buffer = self.buf,
-    callback = function() vim.schedule(function() paint_frame(self) end) end,
-  })
-  if blink_used or not Snacks.dashboard.status.opened then state.stopped = true; return end
-  blink_used = true
   local function later(delay, callback)
-    state.timers[#state.timers + 1] = vim.defer_fn(function()
-      if state.stopped or not visible(self) or vim.api.nvim_get_current_buf() ~= self.buf then stop(); return end
+    local generation = state.generation
+    state.timers[1] = vim.defer_fn(function()
+      if generation ~= state.generation then return end
+      state.timers = {}
+      if state.stopped or not visible(self) or vim.api.nvim_get_current_win() ~= self.win then stop(); return end
       callback()
     end, delay)
   end
-  later(450, function()
+  local function blink()
     state.closed = true
     paint_frame(self)
-    later(130, function() state.closed = false; state.stopped = true; paint_frame(self) end)
-  end)
+    later(130, function()
+      state.closed = false
+      paint_frame(self)
+      later(math.random(3000, 5000), blink)
+    end)
+  end
+  local function start()
+    if not state.stopped or not visible(self) or vim.api.nvim_get_current_win() ~= self.win then return end
+    state.stopped = false
+    paint_frame(self)
+    later(450, blink)
+  end
+  vim.api.nvim_create_autocmd({ "BufLeave", "WinLeave", "BufWipeout", "BufDelete" }, {
+    group = self.augroup, buffer = self.buf, callback = stop,
+  })
+  vim.api.nvim_create_autocmd({ "BufEnter", "WinEnter" }, {
+    group = self.augroup, buffer = self.buf,
+    callback = function() vim.schedule(start) end,
+  })
+  start()
 end
 
 -- Wrap by display cells (Chinese characters occupy two), preserving highlights.
