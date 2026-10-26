@@ -1,0 +1,15 @@
+onboarding = false
+
+[theme]
+name = "terminal"
+auto_switch = false
+
+[ui]
+pane_borders = "always"
+pane_gaps = false
+pane_scrollbars = false
+pane_outer_borders = true
+status_indicators = "symbols"
+
+[ui.toast]
+delivery = "off"
