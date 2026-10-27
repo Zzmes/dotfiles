@@ -2,6 +2,17 @@ local lint_config = vim.fn.stdpath("config") .. "/markdownlint-cli2.jsonc"
 
 return {
   {
+    "iamcco/markdown-preview.nvim",
+    init = function()
+      if vim.env.SSH_CONNECTION or vim.env.SSH_TTY then
+        vim.g.mkdp_port = "8765"
+        vim.g.mkdp_open_to_the_world = 0
+        vim.g.mkdp_open_ip = "127.0.0.1"
+        vim.g.mkdp_browserfunc = "mkdp#util#echo_url"
+      end
+    end,
+  },
+  {
     "mason-org/mason.nvim",
     opts = { ensure_installed = { "prettier" } },
   },
