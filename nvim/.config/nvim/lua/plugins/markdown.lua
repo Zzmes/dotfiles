@@ -1,5 +1,3 @@
-local lint_config = vim.fn.stdpath("config") .. "/markdownlint-cli2.jsonc"
-
 return {
   {
     "iamcco/markdown-preview.nvim",
@@ -18,13 +16,11 @@ return {
   },
   {
     "stevearc/conform.nvim",
-    opts = {
-      formatters = {
-        ["markdownlint-cli2"] = {
-          prepend_args = { "--config", lint_config },
-        },
-      },
-    },
+    opts = function(_, opts)
+      opts.formatters_by_ft = opts.formatters_by_ft or {}
+      opts.formatters_by_ft.markdown = { "prettier", "markdown-toc" }
+      opts.formatters_by_ft["markdown.mdx"] = { "prettier", "markdown-toc" }
+    end,
     keys = {
       {
         "<leader>cT",
@@ -50,12 +46,10 @@ return {
   },
   {
     "mfussenegger/nvim-lint",
-    opts = {
-      linters = {
-        ["markdownlint-cli2"] = {
-          prepend_args = { "--config", lint_config },
-        },
-      },
-    },
+    opts = function(_, opts)
+      opts.linters_by_ft = opts.linters_by_ft or {}
+      opts.linters_by_ft.markdown = {}
+      opts.linters_by_ft["markdown.mdx"] = {}
+    end,
   },
 }

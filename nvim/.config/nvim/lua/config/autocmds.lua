@@ -10,3 +10,13 @@
 vim.cmd([[
   highlight CursorLineNr guifg=#a6e3a1  " 当前行号（绿色）
 ]])
+
+-- Markdown source should not flag technical terms as English misspellings.
+vim.api.nvim_create_autocmd({ "FileType", "BufWinEnter" }, {
+  group = vim.api.nvim_create_augroup("markdown_no_spell", { clear = true }),
+  callback = function()
+    if vim.bo.filetype == "markdown" or vim.bo.filetype == "markdown.mdx" then
+      vim.opt_local.spell = false
+    end
+  end,
+})
