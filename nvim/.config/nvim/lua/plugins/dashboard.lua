@@ -1,27 +1,26 @@
--- Sharp Neovim wordmark, from MaximilianLloyd/ascii.nvim (text/neovim.lua).
--- https://github.com/MaximilianLloyd/ascii.nvim/blob/master/lua/ascii/text/neovim.lua
-local wordmark = {
-  "                                                                    ",
-  "       ████ ██████           █████      ██                    ",
-  "      ███████████             █████                            ",
-  "      █████████ ███████████████████ ███   ███████████  ",
-  "     █████████  ███    █████████████ █████ ██████████████  ",
-  "    █████████ ██████████ █████████ █████ █████ ████ █████  ",
-  "  ███████████ ███    ███ █████████ █████ █████ ████ █████ ",
-  " ██████  █████████████████████ ████ █████ █████ ████ ██████",
- }
-local logo_width = 70
-local compact_wordmark = {
-  "███╗   ██╗██╗   ██╗██╗███╗   ███╗",
-  "████╗  ██║██║   ██║██║████╗ ████║",
-  "██╔██╗ ██║██║   ██║██║██╔████╔██║",
-  "██║╚██╗██║╚██╗ ██╔╝██║██║╚██╔╝██║",
-  "██║ ╚████║ ╚████╔╝ ██║██║ ╚═╝ ██║",
-  "╚═╝  ╚═══╝  ╚═══╝  ╚═╝╚═╝     ╚═╝",
+-- Pikachu character art supplied by the user.
+local header = {
+  "          ▀████▀▄▄              ▄█ ",
+  "            █▀    ▀▀▄▄▄▄▄    ▄▄▀▀█ ",
+  "    ▄        █          ▀▀▀▀▄  ▄▀  ",
+  "   ▄▀ ▀▄      ▀▄              ▀▄▀  ",
+  "  ▄▀    █     █▀   ▄█▀▄      ▄█    ",
+  "  ▀▄     ▀▄  █     ▀██▀     ██▄█   ",
+  "   ▀▄    ▄▀ █   ▄██▄   ▄  ▄  ▀▀ █  ",
+  "    █  ▄▀  █    ▀██▀    ▀▀ ▀▀  ▄▀  ",
+  "   █   █  █      ▄▄           ▄▀   ",
 }
+-- Equal display widths preserve the supplied art when centering each row.
+local header_width = 0
+for _, line in ipairs(header) do
+  header_width = math.max(header_width, vim.fn.strdisplaywidth(line))
+end
+for i, line in ipairs(header) do
+  header[i] = line .. (" "):rep(header_width - vim.fn.strdisplaywidth(line))
+end
 
 local function set_highlights()
-  vim.api.nvim_set_hl(0, "NeovimWordmark", { fg = "#7aa2f7" })
+  vim.api.nvim_set_hl(0, "PikachuHeader", { fg = "#e5c890" })
   for group, color in pairs({
     NeovimDateWeekday = "#ff9acb", NeovimDateMonth = "#ffd166", NeovimDateNumber = "#67e8d1",
   }) do
@@ -95,13 +94,13 @@ return {
       local startup = Snacks.dashboard.sections.startup({ icon = "" })
       local footer_rows = wrap_runs(startup.text, self.opts.width)
       local overhead = #footer_rows + 4
-      local logo = available >= logo_width and wordmark or compact_wordmark
-      if available < 34 then logo = { "N E O V I M" } end
+      local logo = available >= header_width and height >= #header + count + overhead
+        and header or { "P I K A C H U" }
       local menu_gap = height >= #logo + count * 2 - 1 + overhead and 1 or 0
       local roomy = height >= #logo + count + overhead
       local result = {}
       for _, line in ipairs(logo) do
-        result[#result + 1] = { text = { { line, hl = "NeovimWordmark" } }, align = "center" }
+        result[#result + 1] = { text = { { line, hl = "PikachuHeader" } }, align = "center" }
       end
       local date = {
         { os.date("%A") .. ", ", hl = "NeovimDateWeekday" },
