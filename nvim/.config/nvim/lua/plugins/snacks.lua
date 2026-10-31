@@ -13,7 +13,12 @@ return {
     indent = {
       indent = { enabled = true, hl = "SnacksIndent" },
       scope = { enabled = true, only_current = true, hl = indent_colors },
-      chunk = { enabled = false },
+      chunk = {
+        enabled = true,
+        only_current = true,
+        hl = indent_colors,
+        char = { corner_top = "╭", corner_bottom = "╰" },
+      },
     },
     terminal = {
       win = {
