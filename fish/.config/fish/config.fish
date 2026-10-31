@@ -14,6 +14,5 @@ alias la='ls -a'
 alias lla='ls -la'
 alias lt='ls --tree'
 
-# vpn
-# set -x https_proxy http://127.0.0.1:7897
-# set -x http_proxy http://127.0.0.1:7897
+# Proxy (enabled by default)
+proxy_on
