@@ -36,6 +36,7 @@ return {
           WinBar = { fg = colors.rosewater, bg = "none" },
           WinBarNC = { fg = colors.overlay1, bg = "none" },
           WinSeparator = { fg = colors.surface1, bg = "none" },
+          TreesitterContextBottom = { link = "NONE" },
 
           -- Floating windows, completion menus, and Snacks Explorer.
           FloatTitle = { fg = colors.subtext0, bg = "none", bold = true },

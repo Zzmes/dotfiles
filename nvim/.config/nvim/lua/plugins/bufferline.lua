@@ -1,8 +1,9 @@
 return {
   "akinsho/bufferline.nvim",
   opts = function(_, opts)
+    local remote = vim.env.SSH_CONNECTION ~= nil or vim.env.SSH_TTY ~= nil
     opts.options = opts.options or {}
-    opts.options.indicator = { style = "underline" }
+    opts.options.indicator = { style = remote and "none" or "underline" }
     local presets = opts.options.style_preset or {}
     if type(presets) ~= "table" then presets = { presets } end
     local no_italic = require("bufferline").style_preset.no_italic
@@ -11,17 +12,23 @@ return {
     -- Use Catppuccin's integration only while that theme is active.
     local theme_highlights = opts.highlights
     opts.highlights = function(defaults)
-      if (vim.g.colors_name or ""):find("catppuccin", 1, true) and theme_highlights then
-        local highlights = type(theme_highlights) == "function" and theme_highlights(defaults) or theme_highlights
-        local accent = highlights.indicator_selected.fg
-        for name, default in pairs(defaults.highlights) do
-          if default.underline then
-            highlights[name] = vim.tbl_extend("force", highlights[name] or {}, { sp = accent })
-          end
-        end
-        return highlights
+      local highlights = defaults.highlights
+      local catppuccin = (vim.g.colors_name or ""):find("catppuccin", 1, true) and theme_highlights
+      if catppuccin then
+        highlights = type(theme_highlights) == "function" and theme_highlights(defaults) or theme_highlights
       end
-      return defaults.highlights
+      for name, default in pairs(defaults.highlights) do
+        if remote and name:match("_selected$") then
+          highlights[name] = vim.tbl_extend("force", highlights[name] or {}, {
+            bg = { highlight = "CursorLine", attribute = "bg" },
+          })
+        elseif catppuccin and default.underline then
+          highlights[name] = vim.tbl_extend("force", highlights[name] or {}, {
+            sp = highlights.indicator_selected.fg,
+          })
+        end
+      end
+      return highlights
     end
     opts.options.offsets = opts.options.offsets or {}
     for _, offset in ipairs(opts.options.offsets) do
