@@ -10,13 +10,6 @@ return {
   },
   keys = {
     {
-      "<leader>aa",
-      function()
-        require("sidekick.cli").toggle({ name = "codex", focus = true })
-      end,
-      desc = "Toggle Codex",
-    },
-    {
       "<leader>as",
       function()
         require("sidekick.cli").select({ filter = { installed = true } })
