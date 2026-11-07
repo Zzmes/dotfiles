@@ -39,7 +39,22 @@ return {
     })
     table.insert(opts.options.offsets, {
       filetype = "sidekick_terminal",
-      text = "Sidekick",
+      text = function()
+        local tool, rightmost = nil, -1
+        for _, win in ipairs(vim.api.nvim_tabpage_list_wins(0)) do
+          local buf = vim.api.nvim_win_get_buf(win)
+          if vim.bo[buf].filetype == "sidekick_terminal" and vim.api.nvim_win_get_config(win).relative == "" then
+            local col = vim.api.nvim_win_get_position(win)[2]
+            if col > rightmost then
+              tool, rightmost = vim.b[buf].sidekick_cli, col
+            end
+          end
+        end
+        local name = tool and tool.name
+        if not name then return "Sidekick" end
+        local labels = { claude = "Claude Code", opencode = "OpenCode", amazon_q = "Amazon Q" }
+        return labels[name] or (name:gsub("^%l", string.upper))
+      end,
       highlight = "Directory",
       text_align = "center",
       separator = true,
