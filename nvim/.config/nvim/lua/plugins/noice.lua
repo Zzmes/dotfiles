@@ -3,7 +3,10 @@ return {
   opts = {
     lsp = {
       hover = {
-        opts = { border = { style = "rounded" } },
+        opts = {
+          border = { style = "rounded" },
+          position = { row = 2 },
+        },
       },
     },
   },
