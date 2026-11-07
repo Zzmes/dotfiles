@@ -20,3 +20,17 @@ vim.api.nvim_create_autocmd({ "FileType", "BufWinEnter" }, {
     end
   end,
 })
+
+if vim.env.SSH_CONNECTION or vim.env.SSH_TTY then
+  vim.opt.clipboard = ""
+  local copy = require("vim.ui.clipboard.osc52").copy("+")
+  vim.api.nvim_create_autocmd("TextYankPost", {
+    group = vim.api.nvim_create_augroup("ssh_clipboard", { clear = true }),
+    callback = function()
+      local event = vim.v.event
+      if event.operator == "y" and event.regname == "" then
+        copy(event.regcontents)
+      end
+    end,
+  })
+end
