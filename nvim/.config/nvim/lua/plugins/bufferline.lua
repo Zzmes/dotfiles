@@ -23,5 +23,12 @@ return {
       text_align = "center",
       separator = true,
     })
+    table.insert(opts.options.offsets, {
+      filetype = "sidekick_terminal",
+      text = "Sidekick",
+      highlight = "Directory",
+      text_align = "center",
+      separator = true,
+    })
   end,
 }
