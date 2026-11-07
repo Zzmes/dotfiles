@@ -10,6 +10,12 @@ local indent_colors = {
 return {
   "folke/snacks.nvim",
   opts = {
+    picker = {
+      sources = {
+        explorer = { ignored = true },
+        files = { ignored = true },
+      },
+    },
     indent = {
       indent = { enabled = true, hl = "SnacksIndent" },
       scope = { enabled = true, only_current = true, hl = indent_colors },
