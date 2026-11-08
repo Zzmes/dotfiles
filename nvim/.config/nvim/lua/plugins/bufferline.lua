@@ -1,5 +1,27 @@
 return {
   "akinsho/bufferline.nvim",
+  config = function(_, opts)
+    require("bufferline").setup(opts)
+    local render = nvim_bufferline
+    vim.o.tabline = "%!v:lua.dotfiles_bufferline()"
+    _G.dotfiles_bufferline = function()
+      local line = render()
+      -- Bufferline draws separators between buffers but omits the final one.
+      local fill = line:find("%#BufferLineFill#%=", 1, true)
+      if not fill or not line:find("%#BufferLineBuffer", 1, true) then return line end
+      local alignment_end = fill + #"%#BufferLineFill#%=" - 1
+      local content = line:sub(1, alignment_end - 2) .. line:sub(alignment_end + 1)
+      local width = vim.api.nvim_eval_statusline(content, { use_tabline = true }).width
+      if width >= vim.o.columns then return line end
+      return line:sub(1, fill - 1) .. "%#BufferLineSeparator#│" .. line:sub(fill)
+    end
+    -- Refresh Bufferline when restoring a session.
+    vim.api.nvim_create_autocmd({ "BufAdd", "BufDelete" }, {
+      callback = function()
+        vim.schedule(function() pcall(render) end)
+      end,
+    })
+  end,
   opts = function(_, opts)
     opts.options = opts.options or {}
     opts.options.indicator = { style = "none" }
@@ -18,11 +40,10 @@ return {
       if (vim.g.colors_name or ""):find("catppuccin", 1, true) and theme_highlights then
         highlights = type(theme_highlights) == "function" and theme_highlights(defaults) or theme_highlights
       end
-      local fill_bg = (highlights.fill or {}).bg or defaults.highlights.fill.bg
       for name in pairs(defaults.highlights) do
-        if name == "background" or name:match("_visible$") or name:match("_selected$") then
+        if name ~= "group_label" and name ~= "group_separator" then
           highlights[name] = vim.tbl_extend("force", highlights[name] or {}, {
-            bg = fill_bg,
+            bg = "NONE",
           })
         end
       end
