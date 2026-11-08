@@ -3,6 +3,9 @@ return {
   opts = function(_, opts)
     opts.options = opts.options or {}
     opts.options.indicator = { style = "none" }
+    opts.options.separator_style = { "│", "│" }
+    opts.options.diagnostics = false
+    opts.options.diagnostics_indicator = nil
     local presets = opts.options.style_preset or {}
     if type(presets) ~= "table" then presets = { presets } end
     local no_italic = require("bufferline").style_preset.no_italic
@@ -15,13 +18,18 @@ return {
       if (vim.g.colors_name or ""):find("catppuccin", 1, true) and theme_highlights then
         highlights = type(theme_highlights) == "function" and theme_highlights(defaults) or theme_highlights
       end
+      local fill_bg = (highlights.fill or {}).bg or defaults.highlights.fill.bg
       for name in pairs(defaults.highlights) do
-        if name:match("_selected$") then
+        if name == "background" or name:match("_visible$") or name:match("_selected$") then
           highlights[name] = vim.tbl_extend("force", highlights[name] or {}, {
-            bg = { highlight = "CursorLine", attribute = "bg" },
+            bg = fill_bg,
           })
         end
       end
+      highlights.buffer_selected.fg = { highlight = "Normal", attribute = "fg" }
+      highlights.buffer_selected.bold = true
+      highlights.background.fg = { highlight = "Comment", attribute = "fg" }
+      highlights.buffer_visible.fg = highlights.background.fg
       return highlights
     end
     opts.options.offsets = opts.options.offsets or {}
