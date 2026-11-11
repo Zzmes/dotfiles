@@ -36,15 +36,19 @@ return {
       end,
     })
 
-    table.insert(opts.sections.lualine_a, 1, color_block({
+    local account = vim.uv.os_get_passwd()
+    local username = account and account.username or vim.env.USER
+    table.insert(opts.sections.lualine_a, 1, {
       "hostname",
       cond = function()
         return vim.env.SSH_CONNECTION ~= nil or vim.env.SSH_TTY ~= nil
       end,
       fmt = function(hostname)
-        return "SSH " .. hostname
+        return username and (username .. "@" .. hostname) or hostname
       end,
-    }, "DiagnosticHint", { right = "" }))
+      color = { fg = "#414b67", bg = "#e5c6ff" },
+      separator = { right = "" },
+    })
 
     local left_arrow = { right = "" }
     color_block(center[1], "Directory", left_arrow)
