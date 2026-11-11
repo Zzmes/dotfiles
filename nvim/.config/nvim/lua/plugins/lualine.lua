@@ -20,11 +20,7 @@ return {
   "nvim-lualine/lualine.nvim",
   opts = function(_, opts)
     local center = opts.sections.lualine_c
-    -- LazyVim places the filetype icon and file path after root and diagnostics.
-    table.remove(center, 4)
-    table.remove(center, 3)
-
-    table.insert(center, {
+    local modified = {
       function()
         return "●"
       end,
@@ -34,12 +30,15 @@ return {
       color = function()
         return { fg = Snacks.util.color("DiagnosticWarn") }
       end,
-    })
+    }
+    table.insert(center, modified)
 
     local left_arrow = { right = "" }
     color_block(center[1], "Directory", left_arrow)
     color_block(center[2], "DiagnosticError", left_arrow)
-    color_block(center[3], "DiagnosticWarn", left_arrow)
+    color_block(center[3], "Function", "")
+    color_block(center[4], "Function", left_arrow)
+    color_block(modified, "DiagnosticWarn", left_arrow)
 
     local right_arrow = { left = "" }
     local right = opts.sections.lualine_x
