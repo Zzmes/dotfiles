@@ -4,6 +4,9 @@
 
 local opt = vim.opt
 
+-- Keep document symbols out of the statusline.
+vim.g.trouble_lualine = false
+
 opt.relativenumber = false -- ❌ 关闭相对行号，显示真实行号
 
 -- Keep native popup menus opaque and add a border where supported.
