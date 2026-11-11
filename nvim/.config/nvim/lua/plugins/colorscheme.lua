@@ -42,6 +42,7 @@ return {
           FloatTitle = { fg = colors.subtext0, bg = "none", bold = true },
           FloatFooter = { fg = colors.overlay1, bg = "none" },
           Pmenu = { fg = colors.overlay2, bg = "none" },
+          PmenuBorder = { fg = colors.blue, bg = "none" },
           -- Cycle indent guides and the active scope through theme colors.
           SnacksIndent1 = { fg = colors.red },
           SnacksIndent2 = { fg = colors.peach },
