@@ -46,7 +46,7 @@ return {
       fmt = function(hostname)
         return username and (username .. "@" .. hostname) or hostname
       end,
-      color = { fg = "#414b67", bg = "#e5c6ff" },
+      color = { fg = "#292c3c", bg = "#e78284", gui = "bold" },
       separator = { right = "" },
     })
 
