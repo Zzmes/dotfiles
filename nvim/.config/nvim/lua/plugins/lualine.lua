@@ -36,8 +36,8 @@ return {
     local left_arrow = { right = "" }
     color_block(center[1], "Directory", left_arrow)
     color_block(center[2], "DiagnosticError", left_arrow)
-    color_block(center[3], "Function", "")
-    color_block(center[4], "Function", left_arrow)
+    color_block(center[3], "DiagnosticHint", "")
+    color_block(center[4], "DiagnosticHint", left_arrow)
     color_block(modified, "DiagnosticWarn", left_arrow)
 
     local right_arrow = { left = "" }
