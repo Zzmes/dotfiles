@@ -15,13 +15,6 @@ return {
         explorer = {
           ignored = true,
           toggles = { ignored = false },
-          on_show = function(picker)
-            local root = picker.layout.root
-            vim.api.nvim_win_call(root.win, function()
-              vim.opt_local.fillchars:append({ vert = "│" })
-            end)
-            root.opts.wo.fillchars = vim.wo[root.win].fillchars
-          end,
         },
         files = { ignored = true },
       },

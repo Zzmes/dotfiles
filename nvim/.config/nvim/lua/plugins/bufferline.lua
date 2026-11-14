@@ -54,11 +54,6 @@ return {
       return highlights
     end
     opts.options.offsets = opts.options.offsets or {}
-    for _, offset in ipairs(opts.options.offsets) do
-      if offset.filetype == "snacks_layout_box" then
-        offset.separator = "│"
-      end
-    end
     table.insert(opts.options.offsets, {
       filetype = "Outline",
       text = "Outline",

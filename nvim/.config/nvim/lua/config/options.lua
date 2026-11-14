@@ -4,6 +4,18 @@
 
 local opt = vim.opt
 
+-- Match the cursor shapes and blinking used by the reference configuration.
+if vim.env.NVIM_MODE ~= "kitty-copy" then
+  opt.guicursor = table.concat({
+    "n-v-c:block",
+    "i-ci-ve:ver25",
+    "r-cr:hor20",
+    "o:hor50",
+    "a:blinkwait700-blinkoff400-blinkon250",
+    "sm:block-blinkwait175-blinkoff150-blinkon175",
+  }, ",")
+end
+
 -- Keep document symbols out of the statusline.
 vim.g.trouble_lualine = false
 

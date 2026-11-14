@@ -35,7 +35,6 @@ return {
           TabLineSel = { fg = colors.text, bg = "none", bold = true },
           WinBar = { fg = colors.rosewater, bg = "none" },
           WinBarNC = { fg = colors.overlay1, bg = "none" },
-          WinSeparator = { fg = colors.surface1, bg = "none" },
           TreesitterContextBottom = { link = "NONE" },
 
           -- Floating windows, completion menus, and Snacks Explorer.
@@ -51,7 +50,6 @@ return {
           SnacksIndent5 = { fg = colors.sapphire },
           SnacksIndent6 = { fg = colors.mauve },
 
-          SnacksWinSeparator = { fg = colors.surface2, bg = "none" },
           SnacksNormal = { fg = colors.text, bg = "none" },
           SnacksNormalNC = { fg = colors.text, bg = "none" },
           SnacksPicker = { fg = colors.text, bg = "none" },
