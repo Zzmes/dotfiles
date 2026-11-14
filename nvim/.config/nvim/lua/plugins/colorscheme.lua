@@ -51,6 +51,7 @@ return {
           SnacksIndent5 = { fg = colors.sapphire },
           SnacksIndent6 = { fg = colors.mauve },
 
+          SnacksWinSeparator = { fg = colors.surface2, bg = "none" },
           SnacksNormal = { fg = colors.text, bg = "none" },
           SnacksNormalNC = { fg = colors.text, bg = "none" },
           SnacksPicker = { fg = colors.text, bg = "none" },
