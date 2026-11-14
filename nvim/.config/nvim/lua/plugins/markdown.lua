@@ -12,7 +12,12 @@ return {
   },
   {
     "mason-org/mason.nvim",
-    opts = { ensure_installed = { "prettier" } },
+    opts = function(_, opts)
+      opts.ensure_installed = vim.tbl_filter(function(tool)
+        return tool ~= "markdownlint-cli2"
+      end, opts.ensure_installed or {})
+      table.insert(opts.ensure_installed, "prettier")
+    end,
   },
   {
     "stevearc/conform.nvim",
