@@ -4,6 +4,8 @@
 
 local opt = vim.opt
 
+opt.guicursor:append("c-ci-cr:ver15")
+
 -- Keep document symbols out of the statusline.
 vim.g.trouble_lualine = false
 
