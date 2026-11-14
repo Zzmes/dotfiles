@@ -17,3 +17,7 @@ alias lt='ls --tree'
 # Proxy (enabled by default)
 proxy_on
 fish_add_path $HOME/.local/bin
+
+
+# Added by Antigravity CLI installer
+set -gx PATH "/Users/zzmes/.local/bin" $PATH
