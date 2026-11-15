@@ -1,12 +1,18 @@
+# Window
+window-save-state = never
+window-width = 206
+window-height = 51
+
+# Font and spacing
 font-family="Maple-Mono-NF-CN"
 font-size = 13
 font-thicken = true
 font-thicken-strength = 100
+adjust-cell-height = 5
 
+# Background and colors
 background-opacity = 0.95
 # background-blur = 20
-
-# Colors copied from macOS Terminal: Clear Dark
 background = #212734
 foreground = #e6e6e6
 bold-color = #f0f0f0
@@ -29,14 +35,13 @@ palette = 13=#d389e5
 palette = 14=#84dde0
 palette = 15=#e5eff5
 
-shell-integration-features = ssh-env,ssh-terminfo,no-cursor
-
-# Neovide-style cursor animation
-custom-shader = ~/Library/Application Support/com.mitchellh.ghostty/cursor_warp.glsl
-adjust-cell-height = 5
-cursor-style = block
+# Cursor
+cursor-style = bar
 cursor-style-blink = false
 adjust-cursor-thickness = 3
 cursor-color = cell-foreground
+custom-shader = ~/Library/Application Support/com.mitchellh.ghostty/cursor_warp.glsl
 
+# Shell and scrolling
+shell-integration-features = ssh-env,ssh-terminfo,no-cursor
 mouse-scroll-multiplier = precision:1,discrete:1
