@@ -1,7 +1,7 @@
 # Window
 window-save-state = never
-window-width = 206
-window-height = 51
+window-width = 225
+window-height = 55
 
 # Font and spacing
 font-family="Maple-Mono-NF-CN"
