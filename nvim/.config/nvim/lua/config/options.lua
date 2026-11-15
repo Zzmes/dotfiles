@@ -4,6 +4,15 @@
 
 local opt = vim.opt
 
+vim.filetype.add({
+  filename = {
+    ["compose.yaml"] = "yaml.docker-compose",
+    ["compose.yml"] = "yaml.docker-compose",
+    ["docker-compose.yaml"] = "yaml.docker-compose",
+    ["docker-compose.yml"] = "yaml.docker-compose",
+  },
+})
+
 -- Match the cursor shapes and blinking used by the reference configuration.
 if vim.env.NVIM_MODE ~= "kitty-copy" then
   opt.guicursor = table.concat({
