@@ -30,7 +30,7 @@ palette = 15=#e5eff5
 shell-integration-features = ssh-env,ssh-terminfo
 
 # Neovide-style cursor animation
-custom-shader = ~/Library/Application Support/com.mitchellh.ghostty/cursor_warp.glsl
+# custom-shader = ~/Library/Application Support/com.mitchellh.ghostty/cursor_warp.glsl
 adjust-cell-height = 3
 cursor-color = cell-foreground
 
