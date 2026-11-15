@@ -1,5 +1,7 @@
 font-family="Maple-Mono-NF-CN"
 font-size = 13
+font-thicken = true
+font-thicken-strength = 100
 
 background-opacity = 0.95
 # background-blur = 20
@@ -27,11 +29,14 @@ palette = 13=#d389e5
 palette = 14=#84dde0
 palette = 15=#e5eff5
 
-shell-integration-features = ssh-env,ssh-terminfo
+shell-integration-features = ssh-env,ssh-terminfo,no-cursor
 
 # Neovide-style cursor animation
 # custom-shader = ~/Library/Application Support/com.mitchellh.ghostty/cursor_warp.glsl
-adjust-cell-height = 3
+adjust-cell-height = 4
+cursor-style = block
+cursor-style-blink = false
+adjust-cursor-thickness = 3
 cursor-color = cell-foreground
 
 mouse-scroll-multiplier = precision:1,discrete:1
