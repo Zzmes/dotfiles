@@ -15,6 +15,11 @@ const float TRAIL_THICKNESS_X = 0.9;
 const float FADE_ENABLED = 0.0; // 1.0 to enable fade gradient along the trail, 0.0 to disable
 const float FADE_EXPONENT = 5.0; // exponent for fade gradient along the trail
 
+// Keep the bar bright while typing, then ease between full and dim brightness.
+const float BREATH_IDLE_DELAY = 0.20;
+const float BREATH_PERIOD = 1.2;
+const float BREATH_MIN_BRIGHTNESS = 0.45;
+
 // --- CONSTANTS for easing functions ---
 const float PI = 3.14159265359;
 const float C1_BACK = 1.70158;
@@ -302,6 +307,12 @@ void mainImage(out vec4 fragColor, in vec2 fragCoord){
         // punch hole on the trail, so current cursor is drawn on top
         newColor = mix(newColor, fragColor, step(sdfCurrentCursor, 0.));
 
+    }
+
+    if (iFocus != 0 && iCursorVisible != 0 && iCurrentCursorStyle == CURSORSTYLE_BAR && sdfCurrentCursor < 0.0) {
+        float idleTime = max(0.0, iTime - max(iTimeCursorChange, iTimeFocus) - BREATH_IDLE_DELAY);
+        float pulse = 0.5 + 0.5 * cos(2.0 * PI * idleTime / BREATH_PERIOD);
+        newColor.rgb *= mix(BREATH_MIN_BRIGHTNESS, 1.0, pulse);
     }
 
     fragColor = newColor;
