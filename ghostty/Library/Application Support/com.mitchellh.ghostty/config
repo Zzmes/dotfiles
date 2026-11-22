@@ -38,7 +38,7 @@ palette = 15=#e5eff5
 # Cursor
 cursor-style = bar
 cursor-style-blink = false
-adjust-cursor-thickness = 2
+adjust-cursor-thickness = 3
 cursor-color = cell-foreground
 custom-shader = ~/Library/Application Support/com.mitchellh.ghostty/cursor_warp.glsl
 
