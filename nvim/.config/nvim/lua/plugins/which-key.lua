@@ -5,6 +5,7 @@ return {
       { "<leader>;", icon = { icon = "󰙅", color = "cyan" } },
       { "<leader>K", desc = "Keyword Help", icon = { icon = "", color = "cyan" } },
       { "<leader>a", group = "AI", icon = { icon = "󰚩", color = "purple" }, mode = { "n", "x" } },
+      { "<leader>as", icon = { icon = "󰙴", color = "green" } },
     },
     icons = {
       rules = {
