@@ -59,20 +59,35 @@ return {
           SnacksPickerPreview = { bg = "none" },
           SnacksPickerSelected = { fg = colors.text, bg = colors.surface0, bold = true },
 
-          -- Side panels and Markdown rendering should share the terminal's
-          -- transparent background instead of introducing opaque blocks.
+          -- Side panels share the terminal's transparent background.
           TroubleNormal = { fg = colors.text, bg = "none" },
           TroubleNormalNC = { fg = colors.text, bg = "none" },
-          RenderMarkdownCode = { bg = "none" },
-          RenderMarkdownCodeInline = { bg = "none" },
-          RenderMarkdownH1Bg = { bg = "none" },
-          RenderMarkdownH2Bg = { bg = "none" },
-          RenderMarkdownH3Bg = { bg = "none" },
-          RenderMarkdownH4Bg = { bg = "none" },
-          RenderMarkdownH5Bg = { bg = "none" },
-          RenderMarkdownH6Bg = { bg = "none" },
         }
       end,
+    },
+  },
+
+  {
+    "rose-pine/neovim",
+    name = "rose-pine",
+    lazy = true,
+    opts = {
+      styles = { italic = false, transparency = true },
+      highlight_groups = {
+        FloatBorder = { fg = "highlight_high" },
+        WinSeparator = { link = "FloatBorder", inherit = false },
+        PmenuBorder = { fg = "iris", bg = "NONE" },
+        WinBar = { bg = "NONE" },
+        WinBarNC = { bg = "NONE" },
+        BlinkCmpDoc = { fg = "text", bg = "NONE" },
+        BlinkCmpDocBorder = { link = "FloatBorder", inherit = false },
+        SnacksIndent1 = { fg = "love" },
+        SnacksIndent2 = { fg = "rose" },
+        SnacksIndent3 = { fg = "gold" },
+        SnacksIndent4 = { fg = "leaf" },
+        SnacksIndent5 = { fg = "foam" },
+        SnacksIndent6 = { fg = "iris" },
+      },
     },
   },
 
