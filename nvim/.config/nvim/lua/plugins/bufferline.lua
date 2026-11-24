@@ -1,5 +1,8 @@
 return {
   "akinsho/bufferline.nvim",
+  keys = {
+    { "<A-Tab>", "<cmd>BufferLineCycleNext<cr>", desc = "Next Buffer" },
+  },
   config = function(_, opts)
     require("bufferline").setup(opts)
     local render = nvim_bufferline
