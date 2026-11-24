@@ -30,6 +30,9 @@ vim.g.trouble_lualine = false
 
 opt.relativenumber = false -- ❌ 关闭相对行号，显示真实行号
 
+-- Replace the folded block with an indented line count.
+opt.foldtext = [[repeat(' ', indent(v:foldstart)) . printf('+-- %d lines', v:foldend - v:foldstart + 1)]]
+
 -- Keep native popup menus opaque and add a border where supported.
 opt.pumblend = 0
 if vim.fn.exists("+pumborder") == 1 then

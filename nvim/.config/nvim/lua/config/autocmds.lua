@@ -21,6 +21,17 @@ vim.api.nvim_create_autocmd({ "FileType", "BufWinEnter" }, {
   end,
 })
 
+local function style_folded_line()
+  local comment = vim.api.nvim_get_hl(0, { name = "Comment", link = false })
+  vim.api.nvim_set_hl(0, "Folded", { fg = comment.fg, italic = true })
+end
+
+style_folded_line()
+vim.api.nvim_create_autocmd("ColorScheme", {
+  group = vim.api.nvim_create_augroup("NeovimFoldStyle", { clear = true }),
+  callback = style_folded_line,
+})
+
 if vim.env.SSH_CONNECTION or vim.env.SSH_TTY then
   vim.opt.clipboard = ""
   local copy = require("vim.ui.clipboard.osc52").copy("+")
