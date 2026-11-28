@@ -31,6 +31,18 @@ return {
           local name = terminal.tool.name
           local labels = { claude = "Claude Code", opencode = "OpenCode", amazon_q = "Amazon Q" }
           terminal.opts.float.title = " " .. (labels[name] or name:gsub("^%l", string.upper)) .. " "
+          vim.api.nvim_create_autocmd("WinEnter", {
+            group = terminal.group,
+            callback = function()
+              if not terminal:is_float() or not terminal:is_focused() then return end
+              local tab = vim.api.nvim_get_current_tabpage()
+              for _, shell in pairs(Snacks.terminal.list()) do
+                if not shell.cmd and shell:valid() and shell:is_floating() and vim.api.nvim_win_get_tabpage(shell.win) == tab then
+                  shell:hide()
+                end
+              end
+            end,
+          })
           vim.api.nvim_create_autocmd("VimResized", {
             group = terminal.group,
             callback = function()

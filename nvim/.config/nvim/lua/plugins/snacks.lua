@@ -64,6 +64,15 @@ return {
         border = "rounded",
         title = "  Terminal ",
         title_pos = "center",
+        on_win = function(shell)
+          local sidekick = package.loaded["sidekick.cli.terminal"]
+          if shell.cmd or not sidekick then return end
+          for _, ai in ipairs(sidekick.sessions()) do
+            if ai:is_float() and ai:is_open() and vim.api.nvim_win_get_tabpage(ai.win) == vim.api.nvim_get_current_tabpage() then
+              ai:hide()
+            end
+          end
+        end,
         -- Sidekick centers the content area and draws the border around it.
         width = function()
           return terminal_float.geometry().width
