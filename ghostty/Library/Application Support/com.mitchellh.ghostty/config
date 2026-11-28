@@ -45,3 +45,8 @@ custom-shader = ~/Library/Application Support/com.mitchellh.ghostty/cursor_warp.
 # Shell and scrolling
 shell-integration-features = ssh-env,ssh-terminfo,no-cursor
 mouse-scroll-multiplier = precision:1,discrete:1
+
+# Forward Alt+A to Neovim even when Option produces a character.
+keybind = alt+key_a=esc:a
+
+config-file = ?desktop-wallpaper.local.conf

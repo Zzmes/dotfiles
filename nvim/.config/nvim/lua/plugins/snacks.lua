@@ -1,3 +1,5 @@
+local terminal_float = require("config.terminal_float")
+
 local indent_colors = {
   "SnacksIndent1",
   "SnacksIndent2",
@@ -62,8 +64,19 @@ return {
         border = "rounded",
         title = "  Terminal ",
         title_pos = "center",
-        width = 0.8,
-        height = 0.8,
+        -- Sidekick centers the content area and draws the border around it.
+        width = function()
+          return terminal_float.geometry().width
+        end,
+        height = function()
+          return terminal_float.geometry().height
+        end,
+        row = function()
+          return terminal_float.geometry().row
+        end,
+        col = function()
+          return terminal_float.geometry().col
+        end,
       },
     },
   },
